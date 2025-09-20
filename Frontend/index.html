@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum - Dashboard Produttività</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Momentum Logo" style="width: 64px; height: 64px;">
+                <span>Momentum</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="tasks.html" class="nav-link">Tasks</a>
+                <a href="#" class="nav-link">Calendar</a>
+                <a href="#" class="nav-link">Notes</a>
+                <a href="#" class="nav-link">Focus</a>
+            </nav>
+            <div class="header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-profile">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Profile" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h1 class="welcome-title">Welcome back, Moustafa!</h1>
+            <p class="welcome-subtitle">Embrace the day with purpose and intention. Every moment counts towards your goals.</p>
+        </section>
+
+        <!-- Today's Progress -->
+        <section class="progress-section">
+            <h2 class="section-title">Today's Progress</h2>
+            <div class="progress-cards">
+                <div class="progress-card">
+                    <h3 class="card-title">Tasks Completed</h3>
+                    <div class="card-value">3/5</div>
+                </div>
+                <div class="progress-card">
+                    <h3 class="card-title">Focus Hours</h3>
+                    <div class="card-value">2.5</div>
+                </div>
+                <div class="progress-card">
+                    <h3 class="card-title">Notes Taken</h3>
+                    <div class="card-value">7</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Dashboard -->
+        <section class="dashboard-section">
+            <h2 class="section-title">Progress Dashboard</h2>
+            <div class="dashboard-grid">
+                <!-- Goal Progress -->
+                <div class="dashboard-card goal-progress">
+                    <h3 class="card-title">Goal Progress</h3>
+                    <div class="progress-percentage">75%</div>
+                    <div class="progress-change">This Month <span class="positive">+10%</span></div>
+                    <div class="progress-chart">
+                        <div class="chart-bars">
+                            <div class="bar" style="height: 60%" data-label="Goal 1"></div>
+                            <div class="bar" style="height: 80%" data-label="Goal 2"></div>
+                            <div class="bar" style="height: 45%" data-label="Goal 3"></div>
+                        </div>
+                        <div class="chart-labels">
+                            <span>Goal 1</span>
+                            <span>Goal 2</span>
+                            <span>Goal 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Habit Tracking -->
+                <div class="dashboard-card habit-tracking">
+                    <h3 class="card-title">Habit Tracking</h3>
+                    <div class="progress-percentage">80%</div>
+                    <div class="progress-change">This Week <span class="positive">+5%</span></div>
+                    <div class="habit-chart">
+                        <svg class="wave-chart" viewBox="0 0 300 100">
+                            <path d="M0,50 Q50,20 100,40 T200,30 T300,50" stroke="#6366f1" stroke-width="2" fill="none"/>
+                        </svg>
+                        <div class="week-labels">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood Over Time -->
+                <div class="dashboard-card mood-tracking">
+                    <h3 class="card-title">Mood Over Time</h3>
+                    <div class="progress-percentage">7/10</div>
+                    <div class="progress-change">Last 30 Days <span class="negative">-2%</span></div>
+                    <div class="mood-list">
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 1</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 2</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 3</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 4</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 5</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 6</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 55%"></div>
+                            </div>
+                        </div>
+                        <div class="mood-item">
+                            <span class="mood-label">Mood 7</span>
+                            <div class="mood-bar">
+                                <div class="mood-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Player -->
+        <section class="music-section">
+            <h2 class="section-title">Music Player</h2>
+            <div class="music-player">
+                <div class="music-info">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=60&h=60&fit=crop" alt="Album Cover">
+                    </div>
+                    <div class="track-info">
+                        <h4 class="track-title">Serenity</h4>
+                        <p class="track-artist">Ambient Sounds</p>
+                    </div>
+                </div>
+                <div class="music-controls">
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

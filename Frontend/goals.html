@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum - Goals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset e base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1a1a1a;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-link.active {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+
+        .notification-btn:hover {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .user-plan {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #f0f0f0;
+            padding: 2rem 1.5rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .sidebar-item:hover {
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .sidebar-item.active {
+            background: #e8eaff;
+            color: #5b63d3;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .new-goal-btn {
+            width: 100%;
+            background: #5b63d3;
+            color: white;
+            border: none;
+            padding: 0.875rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        .new-goal-btn:hover {
+            background: #4c54c9;
+            transform: translateY(-1px);
+        }
+
+        /* Progress Overview */
+        .progress-overview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .overview-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .filter-tab {
+            background: none;
+            border: none;
+            padding: 0.75rem 0;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab:hover {
+            color: #1a1a1a;
+        }
+
+        .filter-tab.active {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        /* Goals Grid */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .goal-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .goal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-category {
+            font-size: 0.75rem;
+            color: #666;
+            background: #f5f5f5;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .goal-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .goal-status.active {
+            background: #e8eaff;
+            color: #5b63d3;
+        }
+
+        .goal-status.completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .goal-status.paused {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .goal-progress {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-label {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .progress-percentage {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #5b63d3;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        .goal-deadline {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .goal-description {
+            font-size: 0.875rem;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+        }
+
+        .goal-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: none;
+            border: 1px solid #e5e5e5;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .action-btn:hover {
+            border-color: #5b63d3;
+            color: #5b63d3;
+        }
+
+        .action-btn.primary {
+            background: #5b63d3;
+            border-color: #5b63d3;
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: #4c54c9;
+        }
+
+        /* Quick Add Goal Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: #5b63d3;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            background: white;
+            outline: none;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn.primary {
+            background: #5b63d3;
+            color: white;
+            border: none;
+        }
+
+        .modal-btn.primary:hover {
+            background: #4c54c9;
+        }
+
+        .modal-btn.secondary {
+            background: white;
+            color: #666;
+            border: 1px solid #e5e5e5;
+        }
+
+        .modal-btn.secondary:hover {
+            border-color: #ccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .modal {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .goal-card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .goal-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .goal-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .goal-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-diamond"></i>
+                </div>
+                <span>Momentum</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tasks.html" class="nav-link">Tasks</a>
+                <a href="calendar.html" class="nav-link">Calendar</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+            </nav>
+            <div class="header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-info">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" alt="Sophia" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sophia</span>
+                        <span class="user-plan">Personal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="new-goal-btn" onclick="openNewGoalModal()">
+                <i class="fas fa-plus"></i> New Goal
+            </button>
+
+            <!-- Progress Overview -->
+            <div class="progress-overview">
+                <div class="overview-title">Progress Overview</div>
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Active Goals</span>
+                        <span class="stat-value">5</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed</span>
+                        <span class="stat-value">12</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Success Rate</span>
+                        <span class="stat-value">80%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-section">
+                <h3 class="section-title">Categories</h3>
+                <div class="sidebar-list">
+                    <a href="#" class="sidebar-item active" onclick="filterGoals('all')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <span>All Goals</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterGoals('personal')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Personal</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterGoals('career')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span>Career</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterGoals('health')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <span>Health</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterGoals('learning')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <span>Learning</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="content-header">
+                <h1 class="page-title">Goals</h1>
+                <p class="page-subtitle">Set, track, and achieve your objectives</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterGoalsByStatus('all')">All Goals</button>
+                <button class="filter-tab" onclick="filterGoalsByStatus('active')">Active</button>
+                <button class="filter-tab" onclick="filterGoalsByStatus('completed')">Completed</button>
+                <button class="filter-tab" onclick="filterGoalsByStatus('paused')">Paused</button>
+            </div>
+
+            <!-- Goals Grid -->
+            <div class="goals-grid" id="goalsGrid">
+                <div class="goal-card" data-category="career" data-status="active" onclick="openGoalDetails(this)">
+                    <div class="goal-header">
+                        <div>
+                            <div class="goal-title">Launch Mobile App</div>
+                            <div class="goal-category">Career</div>
+                        </div>
+                        <div class="goal-status active">Active</div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Progress</span>
+                            <span class="progress-percentage">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-calendar"></i>
+                        <span>Due: December 31, 2024</span>
+                    </div>
+                    <div class="goal-description">
+                        Complete development and launch of the productivity app in app stores.
+                    </div>
+                    <div class="goal-actions">
+                        <button class="action-btn primary">Update Progress</button>
+                        <button class="action-btn">Edit Goal</button>
+                    </div>
+                </div>
+
+                <div class="goal-card" data-category="health" data-status="active" onclick="openGoalDetails(this)">
+                    <div class="goal-header">
+                        <div>
+                            <div class="goal-title">Run Marathon</div>
+                            <div class="goal-category">Health</div>
+                        </div>
+                        <div class="goal-status active">Active</div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Progress</span>
+                            <span class="progress-percentage">45%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-calendar"></i>
+                        <span>Due: March 15, 2025</span>
+                    </div>
+                    <div class="goal-description">
+                        Complete training program and participate in city marathon.
+                    </div>
+                    <div class="goal-actions">
+                        <button class="action-btn primary">Log Training</button>
+                        <button class="action-btn">View Plan</button>
+                    </div>
+                </div>
+
+                <div class="goal-card" data-category="learning" data-status="active" onclick="openGoalDetails(this)">
+                    <div class="goal-header">
+                        <div>
+                            <div class="goal-title">Learn Spanish</div>
+                            <div class="goal-category">Learning</div>
+                        </div>
+                        <div class="goal-status active">Active</div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Progress</span>
+                            <span class="progress-percentage">30%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-calendar"></i>
+                        <span>Due: June 30, 2025</span>
+                    </div>
+                    <div class="goal-description">
+                        Achieve conversational level Spanish through daily practice.
+                    </div>
+                    <div class="goal-actions">
+                        <button class="action-btn primary">Practice Today</button>
+                        <button class="action-btn">Resources</button>
+                    </div>
+                </div>
+
+                <div class="goal-card" data-category="personal" data-status="completed" onclick="openGoalDetails(this)">
+                    <div class="goal-header">
+                        <div>
+                            <div class="goal-title">Read 24 Books</div>
+                            <div class="goal-category">Personal</div>
+                        </div>
+                        <div class="goal-status completed">Completed</div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Progress</span>
+                            <span class="progress-percentage">100%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Completed: August 15, 2024</span>
+                    </div>
+                    <div class="goal-description">
+                        Read 2 books per month focusing on personal development and fiction.
+                    </div>
+                    <div class="goal-actions">
+                        <button class="action-btn">View Books</button>
+                        <button class="action-btn">Share Success</button>
+                    </div>
+                </div>
+
+                <div class="goal-card" data-category="career" data-status="paused" onclick="openGoalDetails(this)">
+                    <div class="goal-header">
+                        <div>
+                            <div class="goal-title">Start Side Business</div>
+                            <div class="goal-category">Career</div>
+                        </div>
+                        <div class="goal-status paused">Paused</div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Progress</span>
+                            <span class="progress-percentage">25%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-pause"></i>
+                        <span>Paused: September 1, 2024</span>
+                    </div>
+                    <div class="goal-description">
+                        Launch consulting business focused on productivity and workflow optimization.
+                    </div>
+                    <div class="goal-actions">
+                        <button class="action-btn primary">Resume Goal</button>
+                        <button class="action-btn">Review Plan</button>
+                    </div>
+                </div>
+
+                <div class="goal-card" data-category="health" data-status="active" onclick="openGoalDetails(this)">
+                    <div class="goal-header">
+                        <div>
+                            <div class="goal-title">Meditation Habit</div>
+                            <div class="goal-category">Health</div>
+                        </div>
+                        <div class="goal-status active">Active</div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">Progress</span>
+                            <span class="progress-percentage">60%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-calendar"></i>
+                        <span>Due: Daily habit by Dec 2024</span>
+                    </div>
+                    <div class="goal-description">
+                        Establish daily 20-minute meditation practice for mental wellness.
+                    </div>
+                    <div class="goal-actions">
+                        <button class="action-btn primary">Meditate Now</button>
+                        <button class="action-btn">Track Streak</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Goal Modal -->
+    <div class="modal-overlay" id="newGoalModal">
+        <div class="modal">
+            <h2 class="modal-title">Create New Goal</h2>
+            <form onsubmit="createNewGoal(event)">
+                <div class="form-group">
+                    <label class="form-label">Goal Title</label>
+                    <input type="text" class="form-input" placeholder="What do you want to achieve?" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input form-textarea" placeholder="Describe your goal in detail..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" required>
+                        <option value="">Select a category</option>
+                        <option value="personal">Personal</option>
+                        <option value="career">Career</option>
+                        <option value="health">Health</option>
+                        <option value="learning">Learning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Target Date</label>
+                    <input type="date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" required>
+                        <option value="">Select priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeNewGoalModal()">Cancel</button>
+                    <button type="submit" class="modal-btn primary">Create Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Goals Management Functions
+        function openNewGoalModal() {
+            document.getElementById('newGoalModal').classList.add('show');
+        }
+
+        function closeNewGoalModal() {
+            document.getElementById('newGoalModal').classList.remove('show');
+        }
+
+        function createNewGoal(event) {
+            event.preventDefault();
+            const form = event.target;
+            const title = form.querySelector('input[type="text"]').value;
+            const description = form.querySelector('textarea').value;
+            const category = form.querySelector('select').value;
+            
+            showNotification(`Goal "${title}" created successfully!`);
+            closeNewGoalModal();
+            form.reset();
+        }
+
+        function filterGoals(category) {
+            // Update active sidebar item
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter goal cards
+            const goalCards = document.querySelectorAll('.goal-card');
+            let visibleCount = 0;
+
+            goalCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            showNotification(`Showing ${category} goals`);
+        }
+
+        function filterGoalsByStatus(status) {
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter goal cards
+            const goalCards = document.querySelectorAll('.goal-card');
+            let visibleCount = 0;
+
+            goalCards.forEach(card => {
+                const cardStatus = card.getAttribute('data-status');
+                if (status === 'all' || cardStatus === status) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            showNotification(`Showing ${status} goals`);
+        }
+
+        function openGoalDetails(goalCard) {
+            const title = goalCard.querySelector('.goal-title').textContent;
+            showNotification(`Opening details for "${title}"`);
+            // In a real app, this would open a detailed view or modal
+        }
+
+        function updateGoalProgress(goalCard, newProgress) {
+            const progressFill = goalCard.querySelector('.progress-fill');
+            const progressPercentage = goalCard.querySelector('.progress-percentage');
+            
+            progressFill.style.width = newProgress + '%';
+            progressPercentage.textContent = newProgress + '%';
+            
+            showNotification('Progress updated successfully!');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #5b63d3;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-size: 0.875rem;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('newGoalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeNewGoalModal();
+            }
+        });
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Goals page loaded');
+        });
+    </script>
+</body>
+</html>

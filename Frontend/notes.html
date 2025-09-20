@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum - Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset e base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1a1a1a;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-link.active {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+
+        .notification-btn:hover {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .user-plan {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #f0f0f0;
+            padding: 2rem 1.5rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .sidebar-item:hover {
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .sidebar-item.active {
+            background: #e8eaff;
+            color: #5b63d3;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .new-note-btn {
+            width: 100%;
+            background: #5b63d3;
+            color: white;
+            border: none;
+            padding: 0.875rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        .new-note-btn:hover {
+            background: #4c54c9;
+            transform: translateY(-1px);
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: #f5f5f5;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            font-size: 0.875rem;
+            color: #1a1a1a;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            background: white;
+            border-color: #5b63d3;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 0.875rem;
+        }
+
+        /* Notes List */
+        .notes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .note-item {
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .note-item:hover {
+            background: #f8f9fa;
+        }
+
+        .note-item.active {
+            background: #e8eaff;
+            border-color: #5b63d3;
+        }
+
+        .note-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .note-preview {
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-meta {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .note-tag {
+            background: rgba(91, 99, 211, 0.1);
+            color: #5b63d3;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notes-header {
+            padding: 2rem;
+            border-bottom: 1px solid #f0f0f0;
+            background: white;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Editor */
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .editor-title {
+            flex: 1;
+            border: none;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            outline: none;
+            padding: 0.5rem 0;
+        }
+
+        .editor-title::placeholder {
+            color: #999;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toolbar-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .toolbar-btn.active {
+            background: #e8eaff;
+            color: #5b63d3;
+        }
+
+        .editor-content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1a1a1a;
+            outline: none;
+            resize: none;
+            font-family: inherit;
+        }
+
+        .editor-textarea::placeholder {
+            color: #999;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 4rem 2rem;
+            color: #999;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .empty-action-btn {
+            background: #5b63d3;
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .empty-action-btn:hover {
+            background: #4c54c9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .notes-header {
+                padding: 1rem;
+            }
+
+            .editor-toolbar {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .editor-content {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .toolbar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .editor-container {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .note-item {
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .note-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .note-item:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .note-item:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-diamond"></i>
+                </div>
+                <span>Momentum</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tasks.html" class="nav-link">Tasks</a>
+                <a href="calendar.html" class="nav-link">Calendar</a>
+                <a href="notes.html" class="nav-link active">Notes</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+            </nav>
+            <div class="header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-info">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" alt="Sophia" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sophia</span>
+                        <span class="user-plan">Personal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="new-note-btn" onclick="createNewNote()">
+                <i class="fas fa-plus"></i> New Note
+            </button>
+
+            <!-- Search -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search notes..." onInput="searchNotes(this.value)">
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-section">
+                <h3 class="section-title">Categories</h3>
+                <div class="sidebar-list">
+                    <a href="#" class="sidebar-item active" onclick="filterNotes('all')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <span>All Notes</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterNotes('work')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span>Work</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterNotes('personal')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Personal</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="filterNotes('ideas')">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span>Ideas</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Notes List -->
+            <div class="sidebar-section">
+                <h3 class="section-title">Recent Notes</h3>
+                <div class="notes-list" id="notesList">
+                    <div class="note-item active" data-category="work" onclick="selectNote(this)">
+                        <div class="note-title">Project Planning</div>
+                        <div class="note-preview">Ideas for the new mobile app project. Need to consider user experience and...</div>
+                        <div class="note-meta">
+                            <span class="note-tag">work</span>
+                            <span>2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="note-item" data-category="personal" onclick="selectNote(this)">
+                        <div class="note-title">Book Recommendations</div>
+                        <div class="note-preview">List of books recommended by colleagues. The Lean Startup, Atomic Habits...</div>
+                        <div class="note-meta">
+                            <span class="note-tag">personal</span>
+                            <span>Yesterday</span>
+                        </div>
+                    </div>
+                    <div class="note-item" data-category="ideas" onclick="selectNote(this)">
+                        <div class="note-title">Weekend App Ideas</div>
+                        <div class="note-preview">Quick brainstorm session. Habit tracker, expense manager, meditation timer...</div>
+                        <div class="note-meta">
+                            <span class="note-tag">ideas</span>
+                            <span>3 days ago</span>
+                        </div>
+                    </div>
+                    <div class="note-item" data-category="work" onclick="selectNote(this)">
+                        <div class="note-title">Meeting Notes</div>
+                        <div class="note-preview">Team sync on Q4 goals. Action items: finalize roadmap, assign tasks...</div>
+                        <div class="note-meta">
+                            <span class="note-tag">work</span>
+                            <span>1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="note-item" data-category="personal" onclick="selectNote(this)">
+                        <div class="note-title">Workout Routine</div>
+                        <div class="note-preview">New fitness plan for the month. Focus on strength training and cardio...</div>
+                        <div class="note-meta">
+                            <span class="note-tag">personal</span>
+                            <span>1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="notes-header">
+                <h1 class="page-title">Notes</h1>
+                <p class="page-subtitle">Capture and organize your thoughts</p>
+            </div>
+
+            <!-- Editor -->
+            <div class="editor-container" id="editorContainer">
+                <div class="editor-toolbar">
+                    <input type="text" class="editor-title" placeholder="Untitled note" value="Project Planning">
+                    <div class="toolbar-actions">
+                        <button class="toolbar-btn" onclick="formatText('bold')" title="Bold">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button class="toolbar-btn" onclick="formatText('italic')" title="Italic">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                        <button class="toolbar-btn" onclick="formatText('underline')" title="Underline">
+                            <i class="fas fa-underline"></i>
+                        </button>
+                        <button class="toolbar-btn" onclick="addTag()" title="Add Tag">
+                            <i class="fas fa-tag"></i>
+                        </button>
+                        <button class="toolbar-btn" onclick="saveNote()" title="Save">
+                            <i class="fas fa-save"></i>
+                        </button>
+                        <button class="toolbar-btn" onclick="deleteNote()" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="editor-content">
+                    <textarea class="editor-textarea" placeholder="Start writing your note...">Ideas for the new mobile app project:
+
+User Experience Considerations:
+- Intuitive navigation design
+- Consistent visual hierarchy
+- Accessibility features for all users
+- Dark/light theme toggle
+
+Technical Requirements:
+- React Native for cross-platform development
+- Firebase for backend services
+- Redux for state management
+- Jest for testing framework
+
+Timeline:
+- Week 1-2: UI/UX design and wireframes
+- Week 3-4: Core functionality development
+- Week 5: Testing and bug fixes
+- Week 6: App store submission
+
+Budget Considerations:
+- Development tools and licenses
+- Third-party API costs
+- Marketing and promotion budget
+- App store fees
+
+Next Steps:
+1. Finalize feature requirements
+2. Create detailed project timeline
+3. Assign team responsibilities
+4. Set up development environment</textarea>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-sticky-note"></i>
+                <h3>No note selected</h3>
+                <p>Select a note from the sidebar or create a new one to get started</p>
+                <button class="empty-action-btn" onclick="createNewNote()">Create New Note</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentNote = null;
+
+        function createNewNote() {
+            const title = document.querySelector('.editor-title');
+            const content = document.querySelector('.editor-textarea');
+            
+            title.value = '';
+            content.value = '';
+            title.focus();
+            
+            // Remove active state from sidebar notes
+            document.querySelectorAll('.note-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            showNotification('New note created');
+        }
+
+        function selectNote(noteItem) {
+            // Update active state
+            document.querySelectorAll('.note-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            noteItem.classList.add('active');
+            
+            // Get note content (in a real app, this would load from database)
+            const title = noteItem.querySelector('.note-title').textContent;
+            const category = noteItem.querySelector('.note-tag').textContent;
+            
+            // Update editor
+            document.querySelector('.editor-title').value = title;
+            
+            // Show different content based on selected note
+            const content = getNoteContent(title);
+            document.querySelector('.editor-textarea').value = content;
+            
+            // Show editor
+            document.getElementById('editorContainer').style.display = 'flex';
+            document.getElementById('emptyState').style.display = 'none';
+            
+            currentNote = noteItem;
+        }
+
+        function getNoteContent(title) {
+            const contents = {
+                'Project Planning': `Ideas for the new mobile app project:
+
+User Experience Considerations:
+- Intuitive navigation design
+- Consistent visual hierarchy
+- Accessibility features for all users
+- Dark/light theme toggle
+
+Technical Requirements:
+- React Native for cross-platform development
+- Firebase for backend services
+- Redux for state management
+- Jest for testing framework
+
+Timeline:
+- Week 1-2: UI/UX design and wireframes
+- Week 3-4: Core functionality development
+- Week 5: Testing and bug fixes
+- Week 6: App store submission`,
+
+                'Book Recommendations': `Books to read:
+
+Productivity & Business:
+- The Lean Startup by Eric Ries
+- Atomic Habits by James Clear
+- Deep Work by Cal Newport
+- The 7 Habits of Highly Effective People by Stephen Covey
+
+Technology:
+- Clean Code by Robert Martin
+- You Don't Know JS by Kyle Simpson
+- Design Patterns by Gang of Four
+
+Personal Development:
+- Mindset by Carol Dweck
+- The Power of Now by Eckhart Tolle
+- Man's Search for Meaning by Viktor Frankl`,
+
+                'Weekend App Ideas': `Quick brainstorm session for potential projects:
+
+1. Habit Tracker
+   - Daily habit logging
+   - Progress visualization
+   - Streak counters
+
+2. Expense Manager
+   - Receipt scanning
+   - Budget categories
+   - Monthly reports
+
+3. Meditation Timer
+   - Guided sessions
+   - Custom intervals
+   - Progress tracking
+
+4. Recipe Organizer
+   - Personal recipe collection
+   - Meal planning
+   - Shopping lists`,
+
+                'Meeting Notes': `Team sync on Q4 goals - September 17, 2024
+
+Attendees: Sarah, Mike, Alex, Jennifer
+
+Agenda Items:
+1. Q4 roadmap review
+2. Resource allocation
+3. Project priorities
+
+Action Items:
+- Sarah: Finalize roadmap by Friday
+- Mike: Assign development tasks
+- Alex: Update project timelines
+- Jennifer: Schedule client reviews
+
+Next meeting: September 24, 2024`,
+
+                'Workout Routine': `Monthly fitness plan:
+
+Week 1-2: Foundation Building
+- 3x strength training
+- 2x cardio sessions
+- 1x flexibility work
+
+Week 3-4: Intensity Increase
+- 4x strength training
+- 3x cardio sessions
+- 2x flexibility work
+
+Exercises to focus on:
+- Compound movements (squats, deadlifts)
+- Core strengthening
+- Cardiovascular endurance
+
+Goals:
+- Increase overall strength
+- Improve flexibility
+- Build consistent routine`
+            };
+            
+            return contents[title] || 'Start writing your note...';
+        }
+
+        function formatText(format) {
+            const textarea = document.querySelector('.editor-textarea');
+            const button = event.target.closest('.toolbar-btn');
+            
+            button.classList.toggle('active');
+            showNotification(`Applied ${format} formatting`);
+        }
+
+        function addTag() {
+            const tag = prompt('Enter a tag:');
+            if (tag) {
+                showNotification(`Tag "${tag}" added`);
+            }
+        }
+
+        function saveNote() {
+            const title = document.querySelector('.editor-title').value;
+            const content = document.querySelector('.editor-textarea').value;
+            
+            if (!title.trim()) {
+                showNotification('Please add a title to save the note', 'error');
+                return;
+            }
+            
+            showNotification('Note saved successfully!');
+        }
+
+        function deleteNote() {
+            if (currentNote && confirm('Are you sure you want to delete this note?')) {
+                currentNote.remove();
+                document.getElementById('editorContainer').style.display = 'none';
+                document.getElementById('emptyState').style.display = 'flex';
+                showNotification('Note deleted');
+            }
+        }
+
+        function filterNotes(category) {
+            // Update active sidebar item
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter notes
+            const notes = document.querySelectorAll('.note-item');
+            let visibleCount = 0;
+            
+            notes.forEach(note => {
+                const noteCategory = note.getAttribute('data-category');
+                if (category === 'all' || noteCategory === category) {
+                    note.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    note.style.display = 'none';
+                }
+            });
+            
+            showNotification(`Showing ${category} notes`);
+        }
+
+        function searchNotes(searchTerm) {
+            const notes = document.querySelectorAll('.note-item');
+            
+            notes.forEach(note => {
+                const title = note.querySelector('.note-title').textContent.toLowerCase();
+                const preview = note.querySelector('.note-preview').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm.toLowerCase()) || preview.includes(searchTerm.toLowerCase())) {
+                    note.style.display = 'block';
+                } else {
+                    note.style.display = 'none';
+                }
+            });
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'error' ? '#dc2626' : '#5b63d3'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-size: 0.875rem;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Auto-save functionality
+        let saveTimeout;
+        document.querySelector('.editor-textarea').addEventListener('input', () => {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                showNotification('Auto-saved');
+            }, 2000);
+        });
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Notes page loaded');
+        });
+    </script>
+</body>
+</html>

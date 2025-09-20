@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset e base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1a1a1a;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-link.active {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+
+        .notification-btn:hover {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .user-plan {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #f0f0f0;
+            padding: 2rem 1.5rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .sidebar-item:hover {
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .sidebar-item.active {
+            background: #e8eaff;
+            color: #5b63d3;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f0f0f0;
+        }
+
+        .profile-info h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .edit-profile-btn {
+            background: #5b63d3;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .edit-profile-btn:hover {
+            background: #4c54c9;
+            transform: translateY(-1px);
+        }
+
+        /* Profile Sections */
+        .profile-section {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #5b63d3;
+            box-shadow: 0 0 0 3px rgba(91, 99, 211, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Connected Accounts */
+        .account-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .account-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #666;
+        }
+
+        .account-icon.spotify {
+            background: #1DB954;
+            color: white;
+        }
+
+        .account-icon.google {
+            background: #4285F4;
+            color: white;
+        }
+
+        .account-details h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .account-details p {
+            font-size: 0.8125rem;
+            color: #666;
+        }
+
+        .connect-btn {
+            background: #f5f5f5;
+            color: #666;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .connect-btn:hover {
+            background: #e5e5e5;
+        }
+
+        .connect-btn.connected {
+            background: #e8eaff;
+            color: #5b63d3;
+        }
+
+        /* Settings Items */
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .settings-icon {
+            width: 32px;
+            height: 32px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .settings-details h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .settings-details p {
+            font-size: 0.8125rem;
+            color: #666;
+        }
+
+        .manage-btn {
+            background: none;
+            border: 1px solid #e5e5e5;
+            color: #666;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .manage-btn:hover {
+            border-color: #ccc;
+            color: #1a1a1a;
+        }
+
+        /* Activity Overview */
+        .activity-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        /* Action Buttons */
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .primary-btn {
+            background: #5b63d3;
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .primary-btn:hover {
+            background: #4c54c9;
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #666;
+            border: 1px solid #e5e5e5;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .secondary-btn:hover {
+            border-color: #ccc;
+            color: #1a1a1a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .activity-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-section {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .profile-section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .profile-section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .profile-section:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-diamond"></i>
+                </div>
+                <span>Momentum</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tasks.html" class="nav-link">Tasks</a>
+                <a href="calendar.html" class="nav-link">Calendar</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+            </nav>
+            <div class="header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-info">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" alt="Sophia" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sophia</span>
+                        <span class="user-plan">Personal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-list">
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <span>Tasks</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <span>Calendar</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <span>Notes</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <span>Goals</span>
+                    </a>
+                    <a href="#" class="sidebar-item active">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Profile</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="content-header">
+                <h1 class="page-title">Profile</h1>
+                <p class="page-subtitle">Manage your account settings and preferences</p>
+            </div>
+
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=120&h=120&fit=crop&crop=face" alt="Sophia Bennett" class="profile-avatar">
+                <div class="profile-info">
+                    <h2>Sophia Bennett</h2>
+                    <p>Joined in 2021</p>
+                    <button class="edit-profile-btn" onclick="editProfile()">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="profile-section">
+                <h3 class="section-title">Personal Information</h3>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" value="Sophia Bennett" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" value="sophia.bennett@email.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bio</label>
+                    <textarea class="form-input form-textarea" readonly>Passionate about productivity and personal growth. Love exploring new ways to optimize workflows and achieve goals.</textarea>
+                </div>
+                <div class="profile-actions">
+                    <button class="primary-btn" onclick="enableEdit()">Update Profile</button>
+                </div>
+            </div>
+
+            <!-- Connected Accounts -->
+            <div class="profile-section">
+                <h3 class="section-title">Connected Accounts</h3>
+                <div class="account-item">
+                    <div class="account-info">
+                        <div class="account-icon spotify">
+                            <i class="fab fa-spotify"></i>
+                        </div>
+                        <div class="account-details">
+                            <h4>Spotify</h4>
+                            <p>Connect your Spotify account to integrate your music and playlists.</p>
+                        </div>
+                    </div>
+                    <button class="connect-btn" onclick="toggleConnection(this, 'spotify')">Connect</button>
+                </div>
+                <div class="account-item">
+                    <div class="account-info">
+                        <div class="account-icon google">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="account-details">
+                            <h4>Google Drive</h4>
+                            <p>Connect your Google Drive account to access and manage your files.</p>
+                        </div>
+                    </div>
+                    <button class="connect-btn connected" onclick="toggleConnection(this, 'google')">Connected</button>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="profile-section">
+                <h3 class="section-title">Settings</h3>
+                <div class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="settings-details">
+                            <h4>Notifications</h4>
+                            <p>Manage your notification preferences for tasks, reminders, and updates.</p>
+                        </div>
+                    </div>
+                    <button class="manage-btn" onclick="manageSettings('notifications')">Manage</button>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="settings-details">
+                            <h4>Privacy</h4>
+                            <p>Adjust your privacy settings to control who can see your profile and activity.</p>
+                        </div>
+                    </div>
+                    <button class="manage-btn" onclick="manageSettings('privacy')">Manage</button>
+                </div>
+            </div>
+
+            <!-- Activity Overview -->
+            <div class="profile-section">
+                <h3 class="section-title">Activity Overview</h3>
+                <div class="activity-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">245</div>
+                        <div class="stat-label">Tasks Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Goals Achieved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">87</div>
+                        <div class="stat-label">Notes Created</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Profile Management Functions
+        function editProfile() {
+            showNotification('Profile editor opened');
+            // In a real app, this would open a modal or navigate to an edit page
+        }
+
+        function enableEdit() {
+            const inputs = document.querySelectorAll('.form-input');
+            const isReadonly = inputs[0].hasAttribute('readonly');
+            
+            if (isReadonly) {
+                inputs.forEach(input => {
+                    input.removeAttribute('readonly');
+                    input.style.borderColor = '#5b63d3';
+                });
+                event.target.textContent = 'Save Changes';
+                showNotification('Profile editing enabled');
+            } else {
+                inputs.forEach(input => {
+                    input.setAttribute('readonly', true);
+                    input.style.borderColor = '#e5e5e5';
+                });
+                event.target.textContent = 'Update Profile';
+                showNotification('Profile saved successfully!');
+            }
+        }
+
+        function toggleConnection(button, service) {
+            const isConnected = button.classList.contains('connected');
+            
+            if (isConnected) {
+                button.classList.remove('connected');
+                button.textContent = 'Connect';
+                showNotification(`${service} account disconnected`);
+            } else {
+                button.classList.add('connected');
+                button.textContent = 'Connected';
+                showNotification(`${service} account connected successfully!`);
+            }
+        }
+
+        function manageSettings(type) {
+            showNotification(`Opening ${type} settings...`);
+            // In a real app, this would open settings modal or page
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #5b63d3;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-size: 0.875rem;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize profile features
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add any initialization logic here
+            console.log('Profile page loaded');
+        });
+    </script>
+</body>
+</html>

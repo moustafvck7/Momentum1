@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum - Cloud Storage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset e base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1a1a1a;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-link.active {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+
+        .notification-btn:hover {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .profile-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* User Info */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .user-plan {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #f0f0f0;
+            padding: 2rem 1.5rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .sidebar-item:hover {
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .sidebar-item.active {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: #f5f5f7;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            font-size: 0.9375rem;
+            color: #1a1a1a;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            background: white;
+            border-color: #ccc;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 0.875rem;
+        }
+
+        /* Folders Section */
+        .folders-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .folder-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .folder-card:hover {
+            border-color: #ccc;
+            transform: translateY(-1px);
+        }
+
+        .folder-icon {
+            width: 48px;
+            height: 48px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.25rem;
+            color: #666;
+        }
+
+        .folder-name {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        /* Files Section */
+        .files-section {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .files-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .files-table {
+            width: 100%;
+        }
+
+        .table-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .table-header th {
+            text-align: left;
+            padding: 1rem 2rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .table-row {
+            border-bottom: 1px solid #f5f5f5;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .table-row:hover {
+            background: #f8f9fa;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-cell {
+            padding: 1rem 2rem;
+            font-size: 0.9375rem;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .file-icon {
+            width: 32px;
+            height: 32px;
+            background: #f5f5f7;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .file-icon.pdf {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .file-icon.zip {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .file-icon.pptx {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .file-icon.mp4 {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .file-size {
+            color: #666;
+        }
+
+        .file-date {
+            color: #666;
+        }
+
+        .file-actions {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .table-row:hover .file-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #f0f0f0;
+            color: #1a1a1a;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .empty-state p {
+            font-size: 0.875rem;
+        }
+
+        /* Upload Button */
+        .upload-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: #5b63d3;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(91, 99, 211, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background: #4c54c9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 99, 211, 0.4);
+        }
+
+        /* Storage Usage */
+        .storage-usage {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .usage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .usage-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .usage-text {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .usage-bar {
+            width: 100%;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .usage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #5b63d3, #8b7cf6);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .folders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .files-table {
+                font-size: 0.875rem;
+            }
+
+            .table-header th,
+            .table-cell {
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .folder-card,
+        .files-section,
+        .storage-usage {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .folder-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .folder-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .folder-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-diamond"></i>
+                </div>
+                <span>Momentum</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tasks.html" class="nav-link">Tasks</a>
+                <a href="calendar.html" class="nav-link">Calendar</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="focus.html" class="nav-link">Focus</a>
+            </nav>
+            <div class="header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-info">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" alt="Sophia" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sophia</span>
+                        <span class="user-plan">Personal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-list">
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <span>Inbox</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <span>Calendar</span>
+                    </a>
+                    <a href="#" class="sidebar-item active">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <span>Cloud Storage</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <span>Notes</span>
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <div class="sidebar-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <span>Tasks</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Storage Usage -->
+            <div class="storage-usage">
+                <div class="usage-header">
+                    <span class="usage-title">Storage</span>
+                    <span class="usage-text">2.1 GB of 15 GB used</span>
+                </div>
+                <div class="usage-bar">
+                    <div class="usage-fill" style="width: 14%"></div>
+                </div>
+                <div class="usage-text">14% used</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="content-header">
+                <h1 class="page-title">Cloud Storage</h1>
+                <p class="page-subtitle">Organize your files and documents</p>
+            </div>
+
+            <!-- Search -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+
+            <!-- Folders -->
+            <div class="folders-section">
+                <h2 class="section-title">Folders</h2>
+                <div class="folders-grid">
+                    <div class="folder-card" onclick="openFolder('documents')">
+                        <div class="folder-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="folder-name">Documents</div>
+                    </div>
+                    <div class="folder-card" onclick="openFolder('photos')">
+                        <div class="folder-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="folder-name">Photos</div>
+                    </div>
+                    <div class="folder-card" onclick="openFolder('videos')">
+                        <div class="folder-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="folder-name">Videos</div>
+                    </div>
+                    <div class="folder-card" onclick="openFolder('other')">
+                        <div class="folder-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <div class="folder-name">Other</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Files -->
+            <div class="files-section">
+                <div class="files-header">
+                    <h2 class="section-title">Files</h2>
+                </div>
+                <table class="files-table">
+                    <thead class="table-header">
+                        <tr>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Date Modified</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <div class="file-info">
+                                    <div class="file-icon pdf">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <span class="file-name">Project Proposal.pdf</span>
+                                </div>
+                            </td>
+                            <td class="table-cell file-size">2.5 MB</td>
+                            <td class="table-cell file-date">2023-08-15</td>
+                            <td class="table-cell">
+                                <div class="file-actions">
+                                    <button class="action-btn" onclick="downloadFile('project-proposal.pdf')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="shareFile('project-proposal.pdf')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="deleteFile('project-proposal.pdf')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <div class="file-info">
+                                    <div class="file-icon zip">
+                                        <i class="fas fa-file-archive"></i>
+                                    </div>
+                                    <span class="file-name">Vacation Photos.zip</span>
+                                </div>
+                            </td>
+                            <td class="table-cell file-size">50 MB</td>
+                            <td class="table-cell file-date">2023-07-20</td>
+                            <td class="table-cell">
+                                <div class="file-actions">
+                                    <button class="action-btn" onclick="downloadFile('vacation-photos.zip')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="shareFile('vacation-photos.zip')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="deleteFile('vacation-photos.zip')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <div class="file-info">
+                                    <div class="file-icon pptx">
+                                        <i class="fas fa-file-powerpoint"></i>
+                                    </div>
+                                    <span class="file-name">Presentation Slides.pptx</span>
+                                </div>
+                            </td>
+                            <td class="table-cell file-size">10 MB</td>
+                            <td class="table-cell file-date">2023-06-10</td>
+                            <td class="table-cell">
+                                <div class="file-actions">
+                                    <button class="action-btn" onclick="downloadFile('presentation-slides.pptx')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="shareFile('presentation-slides.pptx')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="deleteFile('presentation-slides.pptx')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <div class="file-info">
+                                    <div class="file-icon mp4">
+                                        <i class="fas fa-file-video"></i>
+                                    </div>
+                                    <span class="file-name">Meeting Recording.mp4</span>
+                                </div>
+                            </td>
+                            <td class="table-cell file-size">100 MB</td>
+                            <td class="table-cell file-date">2023-05-05</td>
+                            <td class="table-cell">
+                                <div class="file-actions">
+                                    <button class="action-btn" onclick="downloadFile('meeting-recording.mp4')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="shareFile('meeting-recording.mp4')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="deleteFile('meeting-recording.mp4')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <div class="file-info">
+                                    <div class="file-icon zip">
+                                        <i class="fas fa-file-archive"></i>
+                                    </div>
+                                    <span class="file-name">Miscellaneous Files.zip</span>
+                                </div>
+                            </td>
+                            <td class="table-cell file-size">15 MB</td>
+                            <td class="table-cell file-date">2023-04-01</td>
+                            <td class="table-cell">
+                                <div class="file-actions">
+                                    <button class="action-btn" onclick="downloadFile('miscellaneous-files.zip')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="shareFile('miscellaneous-files.zip')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                    <button class="action-btn" onclick="deleteFile('miscellaneous-files.zip')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Upload Button -->
+    <button class="upload-btn" onclick="uploadFile()">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <script>
+        // File Operations
+        function openFolder(folderName) {
+            showNotification(`Opening ${folderName} folder`);
+            // Simulate folder opening
+            console.log(`Opening folder: ${folderName}`);
+        }
+
+        function uploadFile() {
+            // Create file input element
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                    showNotification(`Uploading ${files.length} file(s)...`);
+                    // Simulate upload process
+                    setTimeout(() => {
+                        showNotification('Files uploaded successfully!');
+                    }, 2000);
+                }
+            };
+            input.click();
+        }
+
+        function downloadFile(fileName) {
+            showNotification(`Downloading ${fileName}...`);
+            // Simulate download
+            setTimeout(() => {
+                showNotification(`${fileName} downloaded successfully!`);
+            }, 1500);
+        }
+
+        function shareFile(fileName) {
+            showNotification(`Generating share link for ${fileName}...`);
+            // Simulate share link generation
+            setTimeout(() => {
+                showNotification('Share link copied to clipboard!');
+            }, 1000);
+        }
+
+        function deleteFile(fileName) {
+            if (confirm(`Are you sure you want to delete ${fileName}?`)) {
+                showNotification(`${fileName} deleted successfully`);
+                // Remove row from table (simulation)
+                // In real app, this would make an API call
+            }
+        }
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('.table-row');
+            
+            rows.forEach(row => {
+                const fileName = row.querySelector('.file-name').textContent.toLowerCase();
+                if (fileName.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Notifications
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #5b63d3;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-size: 0.875rem;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // File drag and drop
+        const mainContent = document.querySelector('.main-content');
+        let dragCounter = 0;
+
+        mainContent.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            dragCounter++;
+            this.style.background = '#f8f9fa';
+            this.style.border = '2px dashed #5b63d3';
+        });
+
+        mainContent.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            dragCounter--;
+            if (dragCounter === 0) {
+                this.style.background = '';
+                this.style.border = '';
+            }
+        });
+
+        mainContent.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        });
+
+        mainContent.addEventListener('drop', function(e) {
+            e.preventDefault();
+            dragCounter = 0;
+            this.style.background = '';
+            this.style.border = '';
+            
+            const files = Array.from(e.dataTransfer.files);
+            if (files.length > 0) {
+                showNotification(`Uploading ${files.length} file(s) via drag & drop...`);
+                // Simulate upload process
+                setTimeout(() => {
+                    showNotification('Files uploaded successfully!');
+                }, 2000);
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + U for upload
+            if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+                e.preventDefault();
+                uploadFile();
+            }
+            
+            // Ctrl/Cmd + F for search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                document.querySelector('.search-input').focus();
+            }
+        });
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
